@@ -3,6 +3,7 @@ package org.proleed_tasks.task4;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,7 @@ public class task4 {
 
         try {
             WebElement fullName_firstName = driver.findElement(By.id("firstname"));
-            fullName_firstName.click();
+//            fullName_firstName.click();
             fullName_firstName.sendKeys("Vitaliy");
         } catch (NotFoundException e) {
             System.out.println("firstName not found");
@@ -34,7 +35,7 @@ public class task4 {
 
         try {
             WebElement fullName_lastName = driver.findElement(By.id("lastname"));
-            fullName_lastName.click();
+//            fullName_lastName.click();
             fullName_lastName.sendKeys("Padus");
         } catch (NotFoundException e) {
             System.out.println("lastName not found");
@@ -49,7 +50,7 @@ public class task4 {
 
         try {
             WebElement fathername = driver.findElement(By.name("fathername"));
-            fathername.click();
+//            fathername.click();
             fathername.sendKeys("Yaroslav");
         } catch (NotFoundException e) {
             System.out.println("fathername not found");
@@ -57,16 +58,17 @@ public class task4 {
 
         try {
             WebElement mothername = driver.findElement(By.name("mothername"));
-            mothername.click();
+//            mothername.click();
             mothername.sendKeys("Yulia");
         } catch (NotFoundException e) {
             System.out.println("mothername not found");
         }
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,900)");
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(1000,10000)");
+
+
 
         try {
             WebElement id_number = driver.findElement(By.id("identity_number"));
@@ -91,6 +93,8 @@ public class task4 {
             System.out.println("Birth month not found");
         }
 
+
+
         try {
             Select birth_day = new Select(driver.findElement(By.id("dob_date")));
             birth_day.selectByVisibleText("12");
@@ -107,6 +111,8 @@ public class task4 {
             System.out.println("Birth year not found");
         }
 
+        driver.findElement(By.xpath("//*[@id=\"single\"]")).click();
+
         try {
             Select country_code = new Select(driver.findElement(By.xpath("//*[@id=\"country_code\"]")));
             country_code.getAllSelectedOptions();
@@ -115,12 +121,8 @@ public class task4 {
             System.out.println("country_code not found");
         }
 
-        try {
             WebElement mobile_number = driver.findElement(By.id("mobile"));
             mobile_number.sendKeys("0737395132");
-        } catch (NoSuchFieldError e) {
-            System.out.println("no such field error");
-        }
 
 
         try {
@@ -131,6 +133,17 @@ public class task4 {
             System.out.println("nationality not found");
         }
 
+        driver.findElement(By.name("address")).sendKeys("address,9/29,Lviv");
+
+//        js.executeScript("window.scrollBy(0,4000)");
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.findElement(By.id("state")).sendKeys("Lviv");
+
+
+        driver.findElement(By.xpath("//*[@id=\"studentid\"]")).click();
+
 
         try {
             Select country_select = new Select(driver.findElement(By.xpath("//*[@id=\"country\"]")));
@@ -140,6 +153,9 @@ public class task4 {
         } catch (NotFoundException exception) {
             System.out.println("country not found");
         } finally {
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/form/div[15]/div[2]/input")).click();
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
             driver.quit();
         }
     }
